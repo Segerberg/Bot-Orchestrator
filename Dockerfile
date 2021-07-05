@@ -37,9 +37,9 @@ ENV FLASK_APP main.py
 RUN chown -R cin:cin ./
 USER cin
 
-# RUN flask db init
-# RUN flask db migrate
-# RUN flask db upgrade
+RUN flask db init
+RUN flask db migrate
+RUN flask db upgrade
 #RUN python create_superuser.py
 VOLUME /home/cin
 EXPOSE 8080
