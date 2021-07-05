@@ -1,0 +1,46 @@
+{% extends "base.html" %}
+{% import 'bootstrap/wtf.html' as wtf %}
+{% include 'add_conversation_modal.html' %}
+{% block navselect %}
+<li><a href="#" data-toggle="modal" data-target="#conversationModal"><span class="glyphicon glyphicon-plus-sign"
+                                                                           aria-hidden="true"></span> Add Call</a></li>
+<li role="separator" class="divider"></li>
+<li><a href="{{ url_for('bots') }}"><span class="glyphicon glyphicon-cog" aria-hidden="true"></span> Settings</a></li>
+<li role="separator" class="divider"></li>
+<li><a href="{{ url_for('logout') }}">Logout</a></li>
+{% endblock %}
+{% block content %}
+<div class="row">
+    <div class="col-md-2"></div>
+    <div class="col-md-8">
+        <div class="panel panel-default">
+            <div class="panel-heading clearfix">
+                <small class="panel-title"><strong>Calls</strong></small>
+            </div>
+            <div class="panel-body">
+                <ul id="conversionList" class="list-group">
+                    {% for conversation in conversations %}
+                    <li class="list-group-item">
+                        <strong style="font-size: medium"><a
+                                href="{{ url_for('conversation_detail', id=conversation.id) }}">{{conversation.name}}</a></strong>
+                        <a class="btn btn-default btn-sm pull-right"
+                           href="{{ url_for('conversation_detail', id=conversation.id) }}">
+                            <span class="glyphicon glyphicon-eye-open" aria-hidden="true"></span>
+                        </a>
+                        <a class="btn btn-default btn-sm pull-right" onclick="return confirm('Are you sure?')"
+                           href="{{ url_for('delete_conversation', id=conversation.id) }}">
+                            <span class="glyphicon glyphicon-trash" aria-hidden="true"></span>
+                        </a>
+                    </li>
+                    {% endfor %}
+                </ul>
+                <hr>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-2">
+    </div>
+</div>
+{% endblock %}
+{% block add_conversation_modal %}
+{% endblock %}

@@ -1,0 +1,76 @@
+{% extends "base.html" %}
+{% include 'bot_modal.html' %}
+{% include 'message_modal.html' %}
+{% block content %}
+<div class="row">
+    <div class="col-md-4">
+        <div class="panel panel-default">
+            <div class="panel-heading clearfix">
+                <div class="btn-group pull-right">
+                    <a href="#" class="btn btn-success btn-sm" data-toggle="modal" data-target="#messageModal">Add</a>
+                </div>
+                <small class="panel-title"><strong>Messages</strong></small>
+            </div>
+            <div class="panel-body">
+                <table class="table table-striped" id="messages">
+                    <thead>
+                    <th>Message</th>
+                    <th>Delete</th>
+                    </thead>
+                    <tbody>
+                    {% for message in messages %}
+                    <tr>
+                        <td><small>{{message.text}}</small></td>
+                        <td><button class="btn btn-sm btn-danger" hx-post="{{ url_for('_delete_message', id=message.id) }} "hx-target="#messages" hx-swap="outerHTML">
+                            <span class="glyphicon glyphicon-trash" aria-hidden="true"></span>
+                        </button>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-8">
+<div class="panel panel-default">
+            <div class="panel-heading clearfix">
+                <div class="btn-group pull-right">
+                    <a href="#" class="btn btn-success btn-sm" data-toggle="modal" data-target="#botModal">Add</a>
+                </div>
+                <small class="panel-title"><strong>Bots</strong></small>
+            </div>
+            <div class="panel-body">
+                <table class="table table-striped">
+                    <thead>
+                    <th>Name</th>
+                    <th>Year of Birth</th>
+                    <th>Sex</th>
+                    <th>Actions</th>
+                    </thead>
+                    <tbody>
+                    {% for v in bots %}
+                    <tr id="bot_{{v.id}}">
+                        <td>{{v.name}}</td>
+                        <td>{{v.year_of_birth}}</td>
+                        <td>{% if v.sex == 'M' %}Male{% else %}Female{% endif %}</td>
+                         <td> <div class="btn-group" role="group">
+                     <button type="button" class="btn btn-default" hx-target="#bot_{{v.id}}" hx-post="{{ url_for('_delete_bot_from_settings', id=v.id)}}">
+                        <span class="glyphicon glyphicon-trash" aria-hidden="true"></span>
+                     </button>
+                         </div>
+                         </td>
+                    </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-2">
+    </div>
+{% endblock %}
+{% block bot_modal %}
+{% endblock %}
+{% block add_message_modal %}
+{% endblock %}

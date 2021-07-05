@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src='https://meet.jit.si/external_api.js'></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js" integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF" crossorigin="anonymous"></script>
+
+    <style>
+    .temp {
+        background-color:black;
+        width:300px;
+        height:300px;
+    }
+    .card {
+        margin: 2px
+    }
+</style>
+</head>
+<body>
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+  <div class="container-fluid">
+    <a class="navbar-brand" href="{{ url_for('index') }}" onclick="return confirm('Are you sure?')">Bots</a>
+    <div class="collapse navbar-collapse pull-right" id="navbarSupportedContent">
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+            Actions
+          </a>
+          <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+            <li><a class="dropdown-item" href="#" onclick="executeCommand('toggleChat')">Toggle Chat</a></li>
+            <li><hr class="dropdown-divider"></li>
+              <li><a class="dropdown-item" href="#" onclick="executeCommand('hangup')">Hangup</a></li>
+          </ul>
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>
+<br>
+<div class="d-flex flex-wrap bd-highlight mb-3">
+    {% for bot in conversation.bot %}
+    <div class="card">
+        <div class="card-header text-white bg-secondary"><h6 class="card-title">{{bot.name}}</h6></div>
+        <div id="meet_{{bot.id}}"></div>
+        <div class="card-footer">
+            <div class="input-group">
+                <button class="btn btn-sm btn-success input-group-text" onclick="sendMessage_{{bot.id}}('{{bot.id}}_select')">Send</button>
+                <select style="font-size: x-small" id="{{bot.id}}_select" class="form-select" aria-label="Default select example">
+                    {% for message in messages %}
+                    <option value="{{message.text}}">{{message.text}}</option>
+                    {% endfor %}
+                </select>
+            </div>
+        </div>
+    </div>
+    {% endfor %}
+</div>
+
+<script>
+const domain = 'meet.jit.si';
+function options (meet, name){
+    var opts = {
+    roomName: '{{conversation.token}}',
+    width: 400,
+    height: 400,
+    parentNode: document.querySelector(meet),
+    configOverwrite: { startWithAudioMuted: true,
+                        prejoinPageEnabled: false,
+                        notifications:[]
+                        },
+        userInfo: {
+        displayName: name
+    }
+    }
+
+    return opts
+};
+{% for bot in conversation.bot %}
+const api_{{bot.id }} = new JitsiMeetExternalAPI(domain, options('#meet_{{bot.id}}', '{{bot.name}}'));
+
+
+function sendMessage_{{bot.id}}(id) {
+        let UserOption  = document.getElementById(id).value;
+        api_{{bot.id}}.executeCommand('sendChatMessage',
+            UserOption,"",true
+
+);
+
+    }
+{% endfor %}
+
+
+
+ function f(id) {
+       let UserOption  = document.getElementById(id).value;
+
+ }
+
+    function executeCommand(command) {
+        let l = [ {{ botlist|join(', ') }}]
+        for (i in l) {
+            console.log(l[i])
+            l[i].executeCommand(command)
+        }
+
+    }
+</script>
+</body>
+</html>

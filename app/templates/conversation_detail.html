@@ -1,0 +1,74 @@
+{% extends "base.html" %}
+{% import 'bootstrap/wtf.html' as wtf %}
+{% include 'random_bot_modal.html' %}
+{% block navselect %}
+<li><a href="#" data-toggle="modal" data-target="#randomBotModal"><span class="glyphicon glyphicon-plus-sign" aria-hidden="true"></span> Add bots </a></li>
+<li role="separator" class="divider"></li>
+<li><a href="{{ url_for('jitsi', id=conversation.id) }}" onclick="return confirm('Are you sure?')"><span class="glyphicon glyphicon-share" aria-hidden="true"></span> Open meeting</a></li>
+<li role="separator" class="divider"></li>
+<li><a href="{{ url_for('logout') }}">Logout</a></li>
+{% endblock %}
+{% block content %}
+
+<div class="row">
+    <div class="col-md-2">
+    <input type="text" style="position: absolute; left: -999em;" value="https://meet.jit.si/{{conversation.token}}" id="jitsi-link">
+    </div>
+    <div class="col-md-8">
+        <div class="panel panel-default">
+            <div class="panel-heading clearfix">
+                <small class="panel-title"><strong>{{conversation.name}}</strong></small>
+                    <button id="jitsilink" class="btn btn-default btn-sm pull-right" onclick="copyToClipboard()">
+                        <span class="tooltiptext" id="myTooltip">Jitsi Link</span>
+                    </button>
+            </div>
+            <div class="panel-body">
+                <ul id="conversionList" class="list-group">
+                    {% for bot in conversation.bot %}
+                    <li class="list-group-item">
+                        <strong style="font-size: medium">{{bot.name}}</strong>
+                        <a class="btn btn-default btn-sm pull-right"
+                           href="{{ url_for('_delete_bot_from_conversation', id=bot.id, conversation=conversation.id)}}">
+                            <span class="glyphicon glyphicon-trash" aria-hidden="true"></span>
+                        </a>
+                    </li>
+                    {% endfor %}
+                </ul>
+                <hr>
+            </div>
+        </div>
+    </div>
+
+    </div>
+</div>
+
+    <script>
+function copyToClipboard2() {
+  var copyText = document.getElementById("jitsi-link");
+  copyText.select();
+  copyText.setSelectionRange(0, 99999)
+  document.execCommand("copy");
+  document.getElementById("jitsilink").classList.remove('btn-default');
+  document.getElementById("jitsilink").classList.add('btn-success');
+
+
+ // alert("Copied the text: " + copyText.value);
+}
+</script>
+<script>
+function copyToClipboard() {
+  var copyText = document.getElementById("jitsi-link");
+  copyText.select();
+  copyText.setSelectionRange(0, 99999)
+  document.execCommand("copy");
+  document.getElementById("jitsilink").classList.remove('btn-default');
+  document.getElementById("jitsilink").classList.add('btn-success');
+
+  var tooltip = document.getElementById("myTooltip");
+  tooltip.innerHTML = "Copied: " + copyText.value;
+}
+
+</script>
+{% endblock %}
+{% block random_bot_modal %}
+{% endblock %}
