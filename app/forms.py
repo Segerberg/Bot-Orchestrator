@@ -16,6 +16,18 @@ class AddMessageForm(FlaskForm):
 
 class AddConversationForm(FlaskForm):
     name = StringField('Name', validators=[DataRequired()])
+    domain = SelectField('Domain', choices=[('jitsi.debamax.com','jitsi.debamax.com'),
+                                            ('jitsi.folkwang-uni.de','jitsi.folkwang-uni.de'),
+                                            ('jitsi.0x5e.eu','jitsi.0x5e.eu'),
+                                            ('jitsi.brainmill.com','jitsi.brainmill.com'),
+                                            ('jitsi.correns.org','jitsi.correns.org'),
+                                            ('jitsi.debian.social','jitsi.debian.social'),
+                                            ('jitsi.hivos.org','jitsi.hivos.org'),
+                                            ('jitsi.linux.it','jitsi.linux.it'),
+                                            ('videoconf.wevox.eu','videoconf.wevox.eu'),
+                                            ('video.omicro.org','video.omicro.org'),
+                                            ('meet.jit.si','meet.jit.si')
+                                            ])
 
 
 class BotForm(FlaskForm):

@@ -45,6 +45,7 @@ class Conversations(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(128), index=True, unique=True)
     token = db.Column(db.String(128), index=True, unique=True)
+    domain = db.Column(db.String(128), index=True, unique=True)
     bot = db.relationship('Bot', secondary=bot_conversation, lazy='subquery',
                            backref=db.backref('bots', lazy=True))
 

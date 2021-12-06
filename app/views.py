@@ -80,7 +80,7 @@ def add_conversation():
     form = AddConversationForm()
     if form.validate_on_submit():
         try:
-            conversation = Conversations(name=form.name.data, token=token_generator())
+            conversation = Conversations(name=form.name.data, domain=form.domain.data, token=token_generator())
             db.session.add(conversation)
             db.session.commit()
         except IntegrityError:
