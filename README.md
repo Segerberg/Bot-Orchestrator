@@ -45,7 +45,7 @@ name,year_of_birth,sex
 Execute `python install_default_bots.py bots.csv`
  
 ### User guide 
-TBD
+![Main window](/screenshots/main.png)
 
 
 
