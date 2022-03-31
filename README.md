@@ -45,7 +45,51 @@ name,year_of_birth,sex
 Execute `python install_default_bots.py bots.csv`
  
 ### User guide 
+
+#### Main application window 
+The main application window lists all available calls.
+ 
 ![Main window](/screenshots/main.png)
 
+Adding new calls is done from the action menu.
 
+![Main window](/screenshots/add_call.png)
+
+![Main window](/screenshots/add_chat_modal.png)
+
+By clicking either the "view" button or the calls title will open the calls detail view. 
+From the detail views action menu bots can be added. 
+
+#### Call detail view
+
+![Main window](/screenshots/detail_action.png)
+
+The add bot modal takes the following arguments:
+* Number of bots to genarate
+* Year of birth start/end (Used to filter bots that fall in a range of years)
+* Sex
+* Generate random participant ids (If checked the application will add some random alphanumeric numbers to the botnames)
+
+![Main window](/screenshots/random_bot_modal.png)
+
+
+![Main window](/screenshots/detail.png)
+
+Start the call by clicking **Open meeting** in the action menu
+
+#### Bot puppeteer view
+The bot Bot puppeteer view will open a call for each bot in a frame. 
+
+![Main window](/screenshots/bots_run.png)
+
+From the action menu there are two quick functions one for toggling the chat windows of jitsi and one for disconnecting 
+all the bots with one click which can be used to simulate a breakout room (A function that is not available in jitsi )
+
+![Main window](/screenshots/bots_run_action.png)
+
+#### Participant view 
+
+The conference call as seen by the participant.
+
+![Main window](/screenshots/participant_view.png)
 
