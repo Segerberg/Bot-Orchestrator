@@ -1,14 +1,14 @@
-# Communication-in-Networks-Bot-Application (CINBA)
-CINBA is a suite that offers the following resources to research programs wanting to study networks in laboratory experiments.
+# Bot-Orchestrator 
+Bot-Orchestrator  is a suite that offers the following resources to research programs wanting to study networks in laboratory experiments.
 The application allows researchers to add bots to a video conference to increase the perceived number of participants in a test session. Additionally, individual bots can send text messages via a chat function during the video conference. 
 We hope to include voice messaging in the future. Moreover, research programs can manipulate the current messaging feature to induce psychological variables or create different social situations of interest.
 
 # Jitsi installation
-CINBA uses jitsi as backend for conference calls. Please refer to jitsi [documentation](https://jitsi.github.io/handbook/docs/devops-guide/) for how to set up a self-hosted instance 
+Bot-Orchestrator uses jitsi as backend for conference calls. Please refer to jitsi [documentation](https://jitsi.github.io/handbook/docs/devops-guide/) for how to set up a self-hosted instance 
 
 
 # Deployment
-CINBA was deployed to production on University of Gothenburgs 
+Bot-Orchestrator was deployed to production on University of Gothenburgs 
 [openshift](https://www.redhat.com/en/technologies/cloud-computing/openshift)
 platform. Secure communication setting like TSL and CORS are configured with openshift routing. Please see 
 [openshift docs](https://docs.openshift.com/container-platform/4.1/networking/routes/secured-routes.html) for routing 
