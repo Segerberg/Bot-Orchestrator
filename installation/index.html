@@ -51,7 +51,7 @@
     </li>
     <li class="toctree-l2"><a class="reference internal" href="#deployment">Deployment</a>
     </li>
-    <li class="toctree-l2"><a class="reference internal" href="#run-with-docker">Run with docker</a>
+    <li class="toctree-l2"><a class="reference internal" href="#run-locally-with-docker">Run locally with docker</a>
         <ul>
     <li class="toctree-l3"><a class="reference internal" href="#environment-variables">Environment variables</a>
     </li>
@@ -99,8 +99,12 @@ platform. Secure communication setting like TSL and CORS are configured with ope
 <a href="https://docs.openshift.com/container-platform/4.1/networking/routes/secured-routes.html">openshift docs</a> for routing 
 setup. </p>
 <p>Other deployment options are of course possible.</p>
-<h2 id="run-with-docker">Run with docker</h2>
-<p>First build the image by running: 
+<h2 id="run-locally-with-docker">Run locally with docker</h2>
+<p>First clone the repository:
+<code>git clone https://github.com/Segerberg/Bot-Orchestrator.git</code></p>
+<p>and navigate to the cloned project:
+<code>cd Bot-Orchestrator</code></p>
+<p>then build the image by running: 
 <code>docker build -t bots:latest .</code></p>
 <p>Spin it up by running: 
 <code>docker run --name bots -d -p 8000:5000 -e SECRET_KEY=my_very_secret_key --rm bots:latest</code></p>
@@ -116,6 +120,9 @@ Execute <code>python create_user.py</code> and fill in username and password whe
 <p><code>install_default_bots.py</code> is used to batch load the system with bots. The script takes a csv-file as input with the following columns
 name,year_of_birth,sex </p>
 <p>Execute <code>python install_default_bots.py bots.csv</code></p>
+<p><a href="https://github.com/Segerberg/Bot-Orchestrator">
+    <img style="position: absolute; top: 0; right: 0; border: 0;" src="../img/forkme.png" alt="Fork me on GitHub">
+</a></p>
               
             </div>
           </div><footer>
