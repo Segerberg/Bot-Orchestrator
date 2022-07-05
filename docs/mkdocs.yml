@@ -1,0 +1,6 @@
+site_name: Bot-Orchestrator Documentation
+theme: readthedocs
+copyright: ©2022 CC BY-NC-SA Andreas Segerberg
+
+markdown_extensions:
+  - admonition
